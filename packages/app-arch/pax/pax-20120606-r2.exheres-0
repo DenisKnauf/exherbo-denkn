@@ -17,14 +17,6 @@ DEFAULT_SRC_INSTALL_EXTRA_DOCS=( PORTS )
 
 WORK=${WORKBASE}/${PN}-${PV}
 
-src_unpack() {
-	default
-}
-
-src_configure() {
-	default
-}
-
 src_compile() {
 	edo gcc ${CFLAGS} ${LDFLAGS} -o pax *.c
 }
