@@ -19,7 +19,6 @@ WORK=${WORKBASE}/${PN}-${PV}
 
 src_unpack() {
 	default
-	cp "${FILES}/Makefile" "${WORK}"
 }
 
 src_configure() {
@@ -27,9 +26,10 @@ src_configure() {
 }
 
 src_compile() {
-	emake pax
+	edo gcc ${CFLAGS} ${LDFLAGS} -o pax *.c
 }
 
 src_install() {
-	default
+	dobin pax
+	doman pax.1
 }
