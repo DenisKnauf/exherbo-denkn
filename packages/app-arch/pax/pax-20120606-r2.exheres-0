@@ -5,7 +5,7 @@ require debian-upstream [ suffix=.orig.tar.gz ]
 
 SUMMARY="Portable Archive Interchange"
 
-LICENCES="as-is"
+LICENCES="( BSD-3 MIT )"
 SLOT="0"
 PLATFORMS="~amd64"
 
