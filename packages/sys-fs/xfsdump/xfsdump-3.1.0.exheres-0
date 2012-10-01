@@ -6,7 +6,7 @@ HOMEPAGE="http://oss.sgi.com/projects/xfs"
 DOWNLOADS="ftp://oss.sgi.com/projects/xfs/cmd_tars/${PNV}.tar.gz"
 SLOT="0"
 LICENCES="GPL-2"
-PLATFORMS="~x86"
+PLATFORMS="~x86 ~amd64"
 MYOPTIONS=""
 DEPENDENCIES="build+run: sys-fs/xfsprogs"
 DEFAULT_SRC_INSTALL_PARAMS+=( DIST_ROOT="${IMAGE}" )
