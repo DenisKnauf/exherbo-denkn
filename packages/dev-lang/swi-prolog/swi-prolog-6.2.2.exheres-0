@@ -8,13 +8,18 @@ HOMEPAGE="http://www.swi-prolog.org/"
 DOWNLOADS="http://www.swi-prolog.org/download/stable/src/${AN}.tar.gz"
 SLOT="0"
 LICENCES="GPL-2 LGPL-2"
-PLATFORMS="~x86"
+PLATFORMS="~x86 ~amd64"
 DEPENDENCIES=""
 
 MYOPTIONS=""
 WORK="${WORKBASE}/${AN}"
 
+src_configure() {
+	env
+	econf --libdir="${LIBDIR}"
+}
+
 src_install() {
-	default
 	keepdir /usr/lib/swipl-${PV}/library/dialect/ifprolog
+	default
 }
