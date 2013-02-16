@@ -1,0 +1,22 @@
+# Copyright 2013 Denis Knauf
+# Distributed under the terms of the GNU General Public License v2
+
+SCM_REPOSITORY="git://github.com/DenisKnauf/${PN}.git"
+require scm-git
+
+SUMMARY="truckle - smart console cave wrapper"
+
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    run:
+        sys-apps/paludis
+        dev-lang/ruby[>=1.9]
+"
+
+src_install() {
+    emake install PREFIX=/usr D=$IMAGE
+}
