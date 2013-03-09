@@ -16,10 +16,10 @@ WORK=${WORKBASE}/${AN}
 
 src_configure() {
 	env
-	econf --libdir="${LIBDIR}"
+	econf --libdir="/usr/${LIBDIR}"
 }
 
 src_install() {
-	keepdir /usr/lib/swipl-${PV}/library/dialect/ifprolog
+	keepdir /usr/${LIBDIR}/swipl-${PV}/library/dialect/ifprolog
 	default
 }
