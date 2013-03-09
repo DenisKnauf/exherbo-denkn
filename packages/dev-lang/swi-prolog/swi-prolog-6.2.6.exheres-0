@@ -23,3 +23,4 @@ src_install() {
     keepdir /usr/${LIBDIR}/swipl-${PV}/library/dialect/ifprolog
     default
 }
+

@@ -20,3 +20,4 @@ DEPENDENCIES="
 src_install() {
     emake install PREFIX=/usr D="${IMAGE}"
 }
+
