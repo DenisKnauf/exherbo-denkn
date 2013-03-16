@@ -1,4 +1,6 @@
-tinyproxy will run as user tinyproxy, not nobody.
+Source: Written by Denis Knauf.
+Upstream: No, it is a config file. I prefer a specific tinyproxy-user.
+Reason: tinyproxy is a better user than nobody for it.
 --- a/etc/tinyproxy.conf.in	2010-03-03 10:37:24.000000000 +0100
 +++ b/etc/tinyproxy.conf.in	2013-03-09 15:34:41.072135782 +0100
 @@ -12,8 +12,8 @@
