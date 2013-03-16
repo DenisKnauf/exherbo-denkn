@@ -12,14 +12,15 @@ PLATFORMS="~amd64 ~x86"
 DEPENDENCIES=""
 
 src_compile() {
-	# Makefile says:
-	# # -DLONG_OFF_T  The base type of off_t is a long, not a long long.
-	# #               This is often defined in: /usr/include/sys/types.h
-	edo gcc -DLONG_OFF_T ${CFLAGS} ${LDFLAGS} -o pax *.c
+    # Makefile says:
+    # # -DLONG_OFF_T  The base type of off_t is a long, not a long long.
+    # #               This is often defined in: /usr/include/sys/types.h
+    edo $CC -DLONG_OFF_T ${CFLAGS} ${LDFLAGS} -o pax *.c
 }
 
 src_install() {
-	dobin pax
-	doman pax.1
-	emagicdocs
+    dobin pax
+    doman pax.1
+    emagicdocs
 }
+
