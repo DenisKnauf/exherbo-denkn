@@ -1,0 +1,16 @@
+# Copyright 2012 Denis Knauf
+# Distributed under the terms of the GNU General Public License v2
+
+SUMMERY="xfs dump/restore utilities"
+HOMEPAGE="http://oss.sgi.com/projects/xfs"
+DOWNLOADS="ftp://oss.sgi.com/projects/xfs/cmd_tars/${PNV}.tar.gz"
+SLOT="0"
+LICENCES="GPL-2"
+PLATFORMS="~amd64 ~x86"
+MYOPTIONS=""
+DEPENDENCIES="
+    build+run:
+        sys-fs/xfsprogs
+"
+DEFAULT_SRC_INSTALL_PARAMS+=( DIST_ROOT="${IMAGE}" )
+
