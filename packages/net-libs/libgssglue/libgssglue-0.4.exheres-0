@@ -3,7 +3,7 @@
 
 require sourceforge easy-multibuild
 
-SUMMARY="Exports gssapi-library-routines as gssapi-interface"
+SUMMARY="Generic Security Services Application Program Interface"
 DESCRIPTION="
 This library exports a gssapi interface, but doesn't implement any gssapi
 mechanisms itself; instead it calls gssapi routines in other libraries,
