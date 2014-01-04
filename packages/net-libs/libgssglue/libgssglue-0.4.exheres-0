@@ -1,7 +1,7 @@
 # Copyright 2014 Denis Knauf <denis.knauf@gmail.com>
 # Distributed under the terms of the GNU General Public License v3
 
-require easy-multibuild debian-upstream [ suffix=.orig.tar.gz ]
+require easy-multibuild debian-upstream [ suffix=.orig.tar.bz2 ]
 
 SUMMARY="Generic Security Services Application Program Interface"
 DESCRIPTION="
