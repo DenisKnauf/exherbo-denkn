@@ -29,4 +29,12 @@ DEFAULT_SRC_INSTALL_PARAMS+=( DESTDIR="${IMAGE}" )
 
 src_compile() {
   # nothing to do
+  true
+}
+
+src_install() {
+  default
+
+  keepdir /etc/netctl/interfaces
+  keepdir /etc/netctl/hooks
 }
