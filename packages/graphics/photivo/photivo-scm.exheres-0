@@ -1,0 +1,16 @@
+# Copyright (c) 2014 Denis Knauf
+# Distributed under the terms of the GNU General Public License v3
+
+require scm-hg
+require qmake
+
+SUMMARY="Photivo is a free and open source (GPL3) photo processor."
+HOMEPAGE="http://photivo.org/"
+SCM_REPOSITORY="https://code.google.com/p/photivo/"
+LICENCES="GPL-3"
+PLATFORMS="~amd64"
+DEPENDENCIES="
+  build+run:
+    media-gfx/GraphicsMagick[lcms]
+    media-libs/liblqr
+"
