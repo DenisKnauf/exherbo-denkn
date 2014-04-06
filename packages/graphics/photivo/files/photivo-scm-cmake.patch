@@ -1,0 +1,31 @@
+diff --git a/var/tmp/paludis/build/graphics-photivo-scm/work/photivo-scm/CMakeLists.txt b/CMakeLists.txt
+index 431408c..95313ec 100644
+--- a/var/tmp/paludis/build/graphics-photivo-scm/work/photivo-scm/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -105,11 +105,11 @@ if( EXISTS ${PROJECT_SOURCE_DIR}/.hg )
+ # Determine Photivo version with mercurial. Use current date if mercurial is unavailable.
+   find_program( MERCURIAL hg )
+   if( MERCURIAL )
+-    execute_process( COMMAND hg branch OUTPUT_STRIP_TRAILING_WHITESPACE OUTPUT_VARIABLE BRANCH )
+-    execute_process( COMMAND hg log --limit 1 --branch ${BRANCH} --template {date|shortdate}
++    execute_process( COMMAND hg -R ${PROJECT_SOURCE_DIR} branch OUTPUT_STRIP_TRAILING_WHITESPACE OUTPUT_VARIABLE BRANCH )
++    execute_process( COMMAND hg -R ${PROJECT_SOURCE_DIR} log --limit 1 --branch ${BRANCH} --template {date|shortdate}
+                      OUTPUT_STRIP_TRAILING_WHITESPACE OUTPUT_VARIABLE REVDATE )
+-    execute_process( COMMAND hg identify --id OUTPUT_STRIP_TRAILING_WHITESPACE OUTPUT_VARIABLE REVISION )
+-    execute_process( COMMAND hg identify -n OUTPUT_STRIP_TRAILING_WHITESPACE OUTPUT_VARIABLE PACKREVISION )
++    execute_process( COMMAND hg -R ${PROJECT_SOURCE_DIR} identify --id OUTPUT_STRIP_TRAILING_WHITESPACE OUTPUT_VARIABLE REVISION )
++    execute_process( COMMAND hg -R ${PROJECT_SOURCE_DIR} identify -n OUTPUT_STRIP_TRAILING_WHITESPACE OUTPUT_VARIABLE PACKREVISION )
+     set( APPVERSION "${REVDATE} (rev ${REVISION})" )
+     string( REGEX REPLACE [+] "" REVISION ${REVISION} )
+     string( REGEX REPLACE [+] "" PACKREVISION ${PACKREVISION} )
+@@ -138,8 +138,8 @@ message( "Build ptClear                : ${WITH_CLEAR}" )
+ message( "Build Gimp plugin            : ${WITH_GIMP}" )
+ message( "Build Adobe profiles creator : ${WITH_ADOBE_PROFILES}\n" )
+ 
+-set( CMAKE_CXX_FLAGS "" )
+-set( CMAKE_C_FLAGS "" )
++set( CMAKE_CXX_FLAGS "-std=c++11" )
++set( CMAKE_C_FLAGS "-std=c++11" )
+ set( CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -funroll-loops -fopenmp -std=gnu++0x" )
+ set( CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} -std=gnu++0x" )
+ set( CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -std=gnu++0x" )
