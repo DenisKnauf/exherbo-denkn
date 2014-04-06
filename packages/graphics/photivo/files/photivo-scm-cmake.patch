@@ -19,7 +19,8 @@ diff -r d687864489da CMakeLists.txt
      string( REGEX REPLACE [+] "" PACKREVISION ${PACKREVISION} )
 @@ -140,9 +140,9 @@
  
- set( CMAKE_CXX_FLAGS "" )
+-set( CMAKE_CXX_FLAGS "" )
++set( CMAKE_CXX_FLAGS "-std=gnu++11" )
  set( CMAKE_C_FLAGS "" )
 -set( CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -funroll-loops -fopenmp -std=gnu++0x" )
 -set( CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} -std=gnu++0x" )
