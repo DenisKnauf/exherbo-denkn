@@ -1,0 +1,24 @@
+# Copyright 2014 Denis Knauf
+# Distributed under the terms of the GNU General Public License v2
+
+SUMMERY="Graphical user interface for GNU's Framework for Secure Peer-to-Peer Networking"
+HOMEPAGE="https://gnunet.org/"
+DOWNLOADS="http://ftpmirror.gnu.org/gnunet/${PNV}.tar.gz"
+SLOT="0"
+LICENCES="GPL-2"
+PLATFORMS="~amd64"
+MYOPTIONS="gnunet-qr gnunet-namestore-gtk"
+# most deps not tested. see https://gnunet.org/dependencies
+DEPENDENCIES="
+    build+run:
+        net-misc/gnunet[=$PV]
+        x11-libs/gtk+[>=3.0]
+        dev-util/glade[>=3.18.3]
+        gnunet-namestore-gtk? (
+            media-libs/qrencode[>=3]
+        )
+"
+        #gnunet-qr? (
+        #    python-zbar[>=0.10]
+        #)
+

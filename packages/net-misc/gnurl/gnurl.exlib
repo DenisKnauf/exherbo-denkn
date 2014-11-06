@@ -1,0 +1,11 @@
+# Copyright 2014 Denis Knauf <denis+exherbo@denkn.at>
+# Distributed under the terms of the GNU General Public License v2
+
+SUMMARY="A Client that groks URLs (GNUish fork for gnunet)"
+HOMEPAGE="https://gnunet.org/gnurl"
+DOWNLOADS="https://gnunet.org/sites/default/files/${PNV}.tar.gz"
+WORK="${WORKBASE}/gnurl--"
+
+LICENCES="MIT"
+SLOT="0"
+
