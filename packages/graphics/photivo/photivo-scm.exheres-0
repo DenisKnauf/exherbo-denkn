@@ -25,4 +25,5 @@ DEPENDENCIES="
 "
 DEFAULT_SRC_PREPARE_PATCHES=(
   "${FILES}/${PNV}-cmake.patch"
+  "${FILES}/${PNV}-lf_fov1_removed.patch"
 )
