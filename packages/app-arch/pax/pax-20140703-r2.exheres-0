@@ -13,6 +13,8 @@ PLATFORMS="~amd64 ~x86"
 
 DEPENDENCIES=""
 
+WORK="${WORKBASE}/${PN}"
+
 src_compile() {
     # Makefile says:
     # # -DLONG_OFF_T  The base type of off_t is a long, not a long long.
