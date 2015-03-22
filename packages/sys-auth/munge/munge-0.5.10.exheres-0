@@ -32,19 +32,24 @@ src_configure() {
     econf ${conf} --localstatedir=/var
 }
 
-remove() {
+munge_remove() {
     dir="${IMAGE}/$1"
     [ -e "${dir}" ] && edo rm -rf "${dir}"
+}
+
+pkg_setup() {
+    exdirectory --allow /run
 }
 
 src_install() {
     emake DESTDIR="${IMAGE}" install
 
-    remove /var/run
-    remove /var/log
-    remove /etc/init.d
-    remove /etc/default
-    remove /etc/sysconfig
+    keepdir /run/munge
+    keepdir /var/log/munge
+    munge_remove /var/run
+    munge_remove /etc/init.d
+    munge_remove /etc/default
+    munge_remove /etc/sysconfig
 
     keepdir /var/lib/munge
 
