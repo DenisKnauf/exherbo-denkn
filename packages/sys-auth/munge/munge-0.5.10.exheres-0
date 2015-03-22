@@ -1,0 +1,69 @@
+# Denis Knauf
+# based on:
+# Copyright 1999-2014 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/sys-auth/munge/munge-0.5.10-r1.ebuild,v 1.12 2014/03/01 22:38:37 mgorny Exp $
+
+require systemd-service
+
+SUMMARY="An authentication service for creating and validating credentials"
+HOMEPAGE="http://code.google.com/p/munge/"
+DOWNLOADS="http://munge.googlecode.com/files/${PNV}.tar.bz2"
+SLOT="0"
+#LICENSES="GPL-3"
+PLATFORMS="~amd64 ~x86"
+MYOPTIONS="gcrypt systemd"
+DEPENDENCIES="
+    gcrypt? ( dev-libs/libgcrypt[multibuild_c:*(-)?] )
+    !gcrypt? ( dev-libs/openssl[multibuild_c:*(-)?] )
+    group/munge
+    user/munge
+"
+
+src_configure() {
+    local conf=""
+
+    if option gcrypt; then
+        conf="${conf} --with-crypto-lib=libgcrypt"
+    else
+        conf="${conf} --with-crypto-lib=openssl"
+    fi
+
+    econf ${conf} --localstatedir=/var
+}
+
+remove() {
+    dir="${IMAGE}/$1"
+    [ -e "${dir}" ] && edo rm -rf "${dir}"
+}
+
+src_install() {
+    emake DESTDIR="${IMAGE}" install
+
+    remove /var/run
+    remove /var/log
+    remove /etc/init.d
+    remove /etc/default
+    remove /etc/sysconfig
+
+    keepdir /var/lib/munge
+
+    diropts -o munge -g munge -m700
+    dodir /etc/munge
+    insinto /etc/munge
+    doins "${FILES}"/munged.conf
+
+    if option systemd
+    then
+        install_systemd_files
+        insinto /usr/${LIBDIR}/tmpfiles.d
+        hereins munge.conf <<EOF
+D /run/munge 0770 munge munge -
+EOF
+    fi
+}
+
+src_test() {
+    emake check
+}
+

@@ -1,0 +1,19 @@
+# SystemD File for munged
+# Steve Traylen <steve.traylen@cern.ch> & Denis Knauf
+
+[Unit]
+Description=An authentication service for creating and validating credentials
+After=syslog.target auditd.service network.target
+
+[Service]
+Type=forking
+User=munge
+# Start up will fail if /etc/munge/munge.key does not exist
+# A fresh key can be generated with /usr/sbin/create-munge-key
+ExecStartPre=/usr/bin/test -r /etc/munge/munge.key
+ExecStart=/usr/sbin/munged 
+ExecReload=/bin/kill -HUP $MAINPID
+PIDFile=/var/run/munge/munged.pid
+
+[Install]
+WantedBy=multi-user.target
