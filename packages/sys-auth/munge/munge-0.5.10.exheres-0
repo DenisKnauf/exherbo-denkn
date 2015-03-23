@@ -33,8 +33,10 @@ src_configure() {
 }
 
 munge_remove() {
-    dir="${IMAGE}/$1"
-    [ -e "${dir}" ] && edo rm -rf "${dir}"
+    for d in "$@"; do
+        dir="${IMAGE}/$d"
+        [ -e "${dir}" ] && edo rm -rf "${dir}"
+    done
 }
 
 pkg_setup() {
@@ -44,19 +46,15 @@ pkg_setup() {
 src_install() {
     emake DESTDIR="${IMAGE}" install
 
-    keepdir /run/munge
-    keepdir /var/log/munge
-    munge_remove /var/run
-    munge_remove /etc/init.d
-    munge_remove /etc/default
-    munge_remove /etc/sysconfig
+    munge_remove /var/run /etc/init.d /etc/default /etc/sysconfig
 
-    keepdir /var/lib/munge
-
-    diropts -o munge -g munge -m700
-    dodir /etc/munge
+    diropts -o munge -g munge -m 700
+    keepdir /run/munge /var/lib/munge /etc/munge
     insinto /etc/munge
     doins "${FILES}"/munged.conf
+
+    diropts -o munge -g syslog -m 750
+    keepdir /var/log/munge
 
     if option systemd
     then
