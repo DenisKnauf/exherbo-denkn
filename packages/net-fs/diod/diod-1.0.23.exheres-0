@@ -1,0 +1,53 @@
+# Copyright 2015 Denis Knauf <deac.AT.denkn.at>
+# Distributed under the terms of the GNU General Public License v3
+
+require systemd-service
+
+SUMMARY="A multi-threaded, user space file server that speaks 9P2000.L protocol"
+HOMEPAGE="https://github.com/chaos/diod"
+DOWNLOADS="https://github.com/chaos/diod/releases/download/${PV}/diod-${PV}.tar.gz"
+PLATFORMS="~amd64 ~x86"
+SLOT="0"
+#LICENSES="GPL-2"
+MYOPTIONS="lua systemd"
+DEPENDENCIES="
+    lua? (
+        dev-lang/lua:5.1
+    ) [[ description = [ Support config files ] ]]
+    sys-auth/munge[systemd?]
+"
+
+src_configure() {
+    local opts=""
+    if option lua; then
+        CFLAGS="${CFLAGS} -I/usr/include/lua5.1"
+        opts=--with-lua-suffix=5.1
+    fi
+    econf $opts
+}
+
+diod_mv() {
+    local dest="${IMAGE}/$1"
+    shift
+    for f; do
+        edo mv "${IMAGE}/$f" "$dest"
+    done
+}
+
+src_install() {
+    default_src_install
+
+    dodir /usr/bin
+    diod_mv /usr/bin /usr/sbin/dtop /usr/sbin/diod{cat,date,ls,showmount}
+
+    if option systemd; then
+        install_systemd_files
+    fi
+
+    insinto /usr/sbin
+    INSOPTIONS="-m0755"
+    hereins mount.diod <<EOF
+#!/usr/bin/env sh
+exec /usr/sbin/diodmount -n "$@"
+EOF
+}

@@ -1,0 +1,14 @@
+# SystemD File for diod
+# Denis Knauf
+
+[Unit]
+Description=diod is a multi-threaded, user space file server that speaks 9P2000.L protocol.
+After=syslog.target auditd.service munge.target network.target
+
+[Service]
+ExecStart=/usr/sbin/diod
+ExecReload=/bin/kill -HUP $MAINPID
+PIDFile=/var/run/diod/diod.pid
+
+[Install]
+WantedBy=multi-user.target
