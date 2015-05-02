@@ -22,7 +22,14 @@ DEPENDENCIES="
     sys-apps/dialog
     virtual/dhcp-client
 "
-DEFAULT_SRC_INSTALL_PARAMS+=( DESTDIR="${IMAGE}" )
+
+src_prepare() {
+    default
+    LIBDIR=/usr/$(exhost --target)/lib
+    BINDIR=/usr/$(exhost --target)/bin
+    edo sed -e "s#/usr/lib#${LIBDIR}#" -i Makefile
+    edo sed -e "s#/usr/bin#${BINDIR}#" -i Makefile
+}
 
 src_compile() {
   # nothing to do
@@ -31,12 +38,6 @@ src_compile() {
 
 src_install() {
   default
-
-  if [ "lib64" = "${LIBDIR}" ]
-  then
-    edo mv "${IMAGE}/usr/lib/"* "${IMAGE}/usr/lib64"
-    edo rmdir "${IMAGE}/usr/lib/"
-  fi
 
   keepdir /etc/netctl/interfaces
   keepdir /etc/netctl/hooks
