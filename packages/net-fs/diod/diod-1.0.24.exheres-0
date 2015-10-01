@@ -19,6 +19,7 @@ DEPENDENCIES="
 
 src_configure() {
     local opts=""
+    edo sed -i -e 's/^AR = ar/AR = '"$(exhost --target)-ar"'/' ${WORK}/**/Makefile.in
     if option lua; then
         CFLAGS="${CFLAGS} -I/usr/$(exhost --target)/include/lua5.1"
         opts=--with-lua-suffix=5.1
@@ -26,28 +27,20 @@ src_configure() {
     econf $opts
 }
 
-diod_mv() {
-    local dest="${IMAGE}/$1"
-    shift
-    for f; do
-        edo mv "${IMAGE}/$f" "$dest"
-    done
-}
-
 src_install() {
     default_src_install
 
     dodir /usr/$(exhost --target)/bin
-    diod_mv /usr/$(exhost --target)/bin /usr/$(exhost --target)/sbin/dtop /usr/$(exhost --target)/sbin/diod{cat,date,ls,showmount}
 
+    edo rm -rf "${IMAGE}/etc/systemd"
     if option systemd; then
         install_systemd_files
     fi
 
-    insinto /usr/$(exhost --target)/sbin
+    insinto /usr/$(exhost --target)/bin
     INSOPTIONS="-m0755"
     hereins mount.diod <<EOF
 #!/usr/bin/env sh
-exec /usr/$(exhost --target)/sbin/diodmount -n "$@"
+exec /usr/$(exhost --target)/bin/diodmount -n "$@"
 EOF
 }
