@@ -53,7 +53,7 @@ src_install() {
     insinto /etc/munge
     doins "${FILES}"/munged.conf
 
-    diropts -o munge -g syslog -m 750
+    diropts -o munge -g munge -m 750
     keepdir /var/log/munge
 
     if option systemd
