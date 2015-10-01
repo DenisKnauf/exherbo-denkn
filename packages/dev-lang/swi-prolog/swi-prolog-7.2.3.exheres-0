@@ -1,7 +1,7 @@
-# Copyright (c) 2012 Denis Knauf
+# Copyright (c) 2012..2015 Denis Knauf
 # Distributed under the terms of the GNU General Public License v2
 
-AN=pl-${PV}
+AN=swipl-${PV}
 
 SUMMARY="SWI-Prolog offers a comprehensive Free Software Prolog environment"
 HOMEPAGE="http://www.swi-prolog.org/"
@@ -14,12 +14,8 @@ DEPENDENCIES=""
 MYOPTIONS=""
 WORK=${WORKBASE}/${AN}
 
-src_configure() {
-    econf --libdir="/usr/${LIBDIR}"
-}
-
 src_install() {
-    keepdir /usr/${LIBDIR}/swipl-${PV}/library/dialect/ifprolog
+    keepdir /usr/$(exhost --target)/lib/swipl-${PV}/library/dialect/ifprolog
     default
 }
 
