@@ -40,8 +40,8 @@ DEPENDENCIES="
         #    python-zbar[>=0.10]
         #)
 
-src_install() {
-    default_src_install
-    edo mv ${IMAGE}/usr/lib/gnunet/libexec/* ${IMAGE}/usr/lib64/gnunet/libexec
-    edo rmdir ${IMAGE}/usr/lib/gnunet/libexec ${IMAGE}/usr/lib/gnunet ${IMAGE}/usr/lib
-}
+#src_install() {
+#    default_src_install
+#    edo mv ${IMAGE}/usr/lib/gnunet/libexec/* ${IMAGE}/usr/lib64/gnunet/libexec
+#    edo rmdir ${IMAGE}/usr/lib/gnunet/libexec ${IMAGE}/usr/lib/gnunet ${IMAGE}/usr/lib
+#}
