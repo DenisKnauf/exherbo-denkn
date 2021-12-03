@@ -1,6 +1,5 @@
-Exherbo Repository: DenKn
-=========================
+Repository moved to git.denkn.at
+================================
 
-Some tools i need and use.
-
--- [Exherbo](http://www.exherbo.org/)
+This repository is moved to https://git.denkn.at/deac/exherbo-denkn/
+Please visit the new Repository.
